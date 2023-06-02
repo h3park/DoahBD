@@ -1,37 +1,88 @@
 <template>
   <div id="container">
     <!-- 메인 -->
-    <div class="mainSection">
+    <div class="mainSection ">
       <img src="../assets/doahJoah_100.jpg"  class="image-fit" z-index=0>
       <div class="imgBlur">
-        <div style="padding: 20rem;">
+        <div style="padding: 2rem;">
           <p style="color:white; font-size: 1.5rem; opacity=1">도아의 돌잔치에<br>초대합니다</p>
         </div>
         
       </div>
     </div>
+    <!-- 사진 -->
+    <div style="height:100vh">
+      <h3>VIEW PHOTOS</h3>
+      <div style="height:90%;">
+        <img :src="require('../assets/gallery/gallery'+currImgIndex+'.jpg')"
+          class="main-img"
+          v-on:mouseover="Hover"
+          >
+        <carousel ref="photoList" id="photoList"
+          :items="10"
+          :margin="6"
+          :freedrag="true" 
+          :nav="false" 
+          :loop="true"
+          :center="true"
+          :dots="false"
+          :auto-height="false"
+          :rewind="false"
+          :startPosition="0"
+          :autoplay="autoplayFlag"
+          :autoplayTimeout="autoplayTime"
+          :autoplayHoverPause="true"
+          @changed="changed"
+          @update="updated"
+        >
+          <img v-for="(_,index) in photoCnt" 
+            :key="index" 
+            :src="require('../assets/gallery/gallery'+index+'.jpg')"
+            @click="GoTo(index)"
+            class="image-fit">
+        </carousel>
+      </div>
+      <!-- 하단 -->
+      
+
+      <div>
+
+      </div>
+    </div>
+
     <!-- 인사? -->
     <div>
-      <p>세상에서 가장 큰 선물로 우리에게 와준<br>도아쨩</p>
+      <p>{{}}</p>
     </div>
+
     <!-- 달력? -->
     <div>
       <b-calendar
-        id="calendar"
-        :readonly="readonly"
+        id="my_calendar"
+        ref="calendar"
+        disabled=true
+        hide-header=true
+        no-key-nav=true
+        label-help=""
+        value="2023-08-23"
+        readonly=true
+        selected-variant="info"
+        block 
       >
-
       </b-calendar>
+      <!-- 까지 며칠 남았습니다 -->
     </div>
+
     <!-- 지도 -->
     <div class="dirSection">
       <p>위치</p>
-      <div style="width:100%">
-        <div id="map" style="width:50%;height:450px;margin: auto"></div>  
+      <div class="mapUI">
+        <div id="map"></div>  
         <b-button squared
-          style="width:50%; margin: auto; display:grid"
+          style="width:100%"
           href="https://map.naver.com/v5/directions/-/14138002.419104088,4516506.529278252,%EC%84%9C%EC%9A%B8%ED%81%B4%EB%9F%BD,20202001,PLACE_POI/-/transit?c=15,0,0,0,dh">지도 열기</b-button>
-
+      </div>
+      <div>
         <p style="font-weight: bold">{{placeName}}<span style="font-size:0.9rem; font-weight: normal">{{placeNameDetail.length > 0 ? '/':''}}{{placeNameDetail}}</span></p>
         <p>{{address}}</p>
         <span>{{placeTel}}</span>
@@ -50,8 +101,6 @@
        
 
     </div>
-
-    <!-- 사진 -->
       
     <!-- 연락처 -->
     <div class="contactSection">
@@ -71,8 +120,14 @@
 </template>
 
 <script>
+import carousel from 'vue-owl-carousel'
+
 export default {
   name: 'IndexPage',
+  components: {
+    carousel,
+  },
+
   mounted(){    
     // 네이버 지도 추가
     const script = document.createElement('script');
@@ -83,10 +138,6 @@ export default {
         center: new naver.maps.LatLng(37.5532645, 127.0038206), //지도의 초기 중심 좌표
         zoom: 15, 
          minZoom: 7, //지도의 최소 줌 레벨
-        zoomControl: true, //줌 컨트롤의 표시 여부
-        zoomControlOptions: { //줌 컨트롤의 옵션
-            position: naver.maps.Position.TOP_RIGHT
-        }
       })
       var marker = new naver.maps.Marker({
         position: new naver.maps.LatLng(37.5532645, 127.0038206),
@@ -120,7 +171,11 @@ export default {
     else {
         console.log("You are using Desktop");
     }
-    
+
+    console.log("===")
+    // console.log(this.$refs.calendar)
+    // this.$refs.calendar.activeYMD = "2023-08-23"
+    // this.$refs.calendar.selectedDate = "2023-08-23"
   },
   data(){
     return{
@@ -133,25 +188,85 @@ export default {
       placeTel: "02-2238-7666",
       transport: {"지하철":["동대문","3번 출구"], "버스":[], "승용차":[]},
       parentTel:{"아빠":"01030365213", "엄마": "01028269110"},
-    } 
-  // methods:{
-
-  // }
+      birthDay: "2023-08-23",
+      calendarContext: null,
+      slide: 0,
+      sliding: null,
+      photoCnt: 30,
+      dragged: false,
+      currImgIndex: 0,
+      autoplayFlag: true,
+      autoplayTime: 1000,
+    }
   },
+  methods:{
+    onContext(ctx) {
+      console.log(ctx)
+            console.log("===")
+    console.log(this.$refs.calendar)
+    },
+    changed(){
+      // this.dragged = true;
+      console.log('changed')
+      //       return
+
+      // console.log(this.$refs.photoList)
+    },
+    updated(){
+      console.log('updated')
+      console.log(this.$refs.photoList)
+    },
+    ImageClicked(index){
+    },
+    Hover(){
+            console.log(this.$refs.photoList)
+
+      this.autoplayFlag = false
+      this.$refs.photoList.autoplay = false
+  console.log("==============")
+console.log(this.$refs.photoList.$props["get autoplay"])
+      
+      console.log(this.$refs.photoList.$data.showNext)
+      // this.$refs.photoList_props.autoplay(false);
+      // this.$refs.photoList.$porps.autoplay = false
+
+      
+    }
+  }
 }
 </script>
 <style>
+body {
+    min-width: 330px
+}
 #container {
   width: 100%;
-  height: 100vh;
   position: relative;
   outline: none;
   flex: 1 1 0%;
-  background-color: rgb(232, 232, 232);
+  background-color: #ffe5eb;
   overflow-y: auto;
+  font-family: 'Sunflower', sans-serif;
 }
 #container::-webkit-scrollbar {
   display: none;
+}
+#container .mainSection{
+  width: 100%;
+}
+#container > div{
+  width: 86%;
+  margin: auto;
+  display: block;
+}
+#container h3{
+  /* margin-top: 100px; */
+  text-align: center;
+  font-weight: bold;
+}
+.full{
+  width: 100vw;
+  height: 100vh;
 }
 .mainSection{
   width: 100vw;
@@ -178,11 +293,69 @@ export default {
 }
 
 
+/* 갤러리 */
+/* #photoList div{
+  min-height: 150px;
+  max-height: 250px;
+} */
+#photoList{
+  height: 20%;
+}
+.main-img{
+  height:80%; 
+  min-height: 500px;
+  display: block;
+  margin: auto;
+  padding-bottom: 1rem;
+}
+#photoList .owl-stage > div{
+  aspect-ratio: 1/1;
+}
 
+/* 달력 */
+#my_calendar__calendar-nav_{
+  position: absolute;
+  height: 1px;
+  overflow: hidden;
+}
+#my_calendar__calendar-grid_{
+  max-width: 650px;
+  margin: auto;
+}
+#my_calendar__calendar-grid_ .text-muted{
+  color: black !important;
+}
+#my_calendar__calendar-grid_ .text-dark{
+  color: black !important;
+}
+#my_calendar__calendar-grid_ .b-calendar-grid-body .btn-info{
+  opacity: 1 !important;
+  background-color: #fc5a8d;
+}
+
+.b-calendar-grid-body .no-gutters > .col, .no-gutters > [class*="col-"]{
+  aspect-ratio: 1 / 0.9;
+}
+
+/* 지도 */
+.dirSection .mapUI #map{
+  max-width:650px; 
+  width: 100%; 
+  /* min-width:300px;  */
+  aspect-ratio: 1 / 0.7; 
+  min-height:300px;
+  margin: auto
+}
+.dirSection .mapUI a{
+  display: block;
+  margin: auto;
+  max-width: 650px;
+  /* min-width: 300px */
+}
 /* 연락처 */
 .contactSection{
   display: flex;
-  flex-direction: row;
+  flex-direction: row;;
 }
 .singleContact{
   display: flex;
@@ -205,5 +378,6 @@ export default {
   width: 30px;
   height: 30px;
 }
+
 </style>>
 
