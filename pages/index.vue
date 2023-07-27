@@ -17,8 +17,9 @@
         <img src="../assets/MAIN1.png" class="mainImg image-contain">
       </div>
       <div class="paragraph temp-abs" style="height: 17%; top:83%">
-        <h4>2023.08.23 12시</h4>
-        <h4>장소</h4>
+        <h4>2023.08.20 12시</h4>
+        <h4>서울클럽
+          <span style="font-size:1.4rem">지리산룸(ROOM)</span></h4>
       </div>
       <!-- <img src="../assets/doahJoah_100.jpg"  class="image-fit" z-index=0>
       <div class="imgBlur">
@@ -33,11 +34,11 @@
       <div class="invitationCard">
         <img src="../assets/invitationTop.png" class="image-fill" style="height:5%;">
         <img src="../assets/words/invitation1.png" class="image-contain sub-title-image">
-        <p class="paragraph card-content size-limit">열 달을 기다려 새로운 생명을 만났습니다.
-          작은 생명의 꼬물거리는 움직임을 보면서 한엇이 감사했습니다.
-          그렇게 저희 부부에게로 온 도아가 어느새 첫 번째 생일을 맞습니다.
-          그동안 도아를 아끼고 사랑해주신 분들께 감사의 마음으로 작은 잔치를 마련했습니다.
-          꼭 참석하셔서 함께 기뻐해주시기 바람니다.
+        <p class="paragraph card-content size-limit">예쁜 미소를 가진 도아가 
+          건강하게 자라서 첫 돌을 맞이했습니다
+          태어나 이 세상에 적응하고 있는 
+          도아의 첫 생일을 
+          함께 축하해 주셔서 감사합니다
         </p>
         <!-- 연락처 -->
         <div class="contactSection size-limit" style="width:65%">
@@ -62,7 +63,7 @@
             hide-header=true
             no-key-nav=true
             label-help=""
-            value="2023-08-23"
+            value="2023-08-20"
             readonly=true
             selected-variant="info"
             block 
@@ -121,16 +122,17 @@
           href="https://naver.me/GZAjsyPn">지도 열기</b-button>
         
         <div class="description">
-          <p style="font-weight: bold">{{placeName}}<span style="font-size:0.9rem; font-weight: normal">{{placeNameDetail.length > 0 ? '/':''}}{{placeNameDetail}}</span></p>
-          <p>{{address}}</p>
-          <p>{{placeTel}}</p>
-
+          <div>
+            <p><span style="font-size:1.4rem;font-weight:bold">{{placeName}}</span>{{placeNameDetail.length > 0 ? '  /  ':''}}{{placeNameDetail}}</p>
+            <p>&ensp;<b-icon icon="geo-alt-fill" style="color: #7BC99D"></b-icon>&ensp;{{address}}</p>
+            <p>&ensp;<b-icon icon="telephone" style="color: #7BC99D"></b-icon>&ensp;{{placeTel}}</p>
+          </div>
           <!-- guide -->
           <div>
             <ul>
               <li v-for="(des, vehicle) in transport" :key="vehicle">
                 <div>{{vehicle}}</div>
-                <div class="paragraph">{{des.join('\n')}}</div>
+                <p class="paragraph">{{des}}</p>
               </li>
             </ul>
           </div>
@@ -209,9 +211,16 @@ export default {
       mapURL: "nmap://actionPath?parameter=value&appname=http://www.localhost:3000",
       address: "서울 중구 장충단로 86",
       placeName: "서울클럽",
-      placeNameDetail: "",
+      placeNameDetail: "지리산룸",
       placeTel: "02-2238-7666",
-      transport: {"지하철":[], "버스":[], "승용차":[]},
+      transport: {
+        "교통편":"420 / 01 / 8001번 버스", 
+        "자가용":"[ 서울클럽 게스트 주차장 ]\n\
+          이용 시 차량등록을 진행하셔야\n 2시간 무료주차 가능합니다\n\
+          [ 자유총연맹 주차장 ] \n\
+          서울클럽 게스트 주차장에 위치한 초소에서 2시간 주차권을 발급 받아야 이용 가능합니다\n\
+          2시간 초과시 주차 비용 발생"
+      },
       parentTel:{"아빠":"01030365213", "엄마": "01028269110"},
       birthDay: "2023-08-23",
       calendarContext: null,
@@ -276,6 +285,7 @@ body {
   /* background-color: #E3F4EA; */
   overflow-y: auto;
   font-family: 'Sunflower', sans-serif;
+  /* font-family: 'Gowun Batang', serif; */
   /* padding-bottom: 7rem; */
 }
 
@@ -363,8 +373,11 @@ body::-webkit-scrollbar{
   margin: auto;
 }
 /* 아래 */
-.mainSection h4{
+.mainSection{
   text-align: center;
+}
+.mainSection span{
+  font-weight: 500;
 }
 /* .mainContainer{
   position: absolute;
@@ -568,12 +581,23 @@ body::-webkit-scrollbar{
   background-color: rgba(255,255,255, .75);
   border-radius: 10px;
 }
+.dirSection .description > div{
+  margin-bottom: 1rem;
+}
 .dirSection .description p{
-  margin: 0;
+  margin: 0 0 0.3rem 0;
+  word-break: keep-all;
+}
+.dirSection .description li{
+  margin-bottom: 0.8rem;
+}
+.dirSection .description li > div{ 
+  margin-bottom: 0.2rem;
+  font-size: 1.2rem;
+  font-weight: 500;
 }
 .dirSection .description .place-name{
   font-weight: bold;
-  font-size: ;
 }
 @media all and (orientation: landscape){
   .dirSection .location-img{
