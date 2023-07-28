@@ -1,12 +1,14 @@
 {
   "name": "DoahBD",
+  "homepage": "https://h3park.github.io/DoahBD/",
   "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "nuxt generate"
+    "generate": "nuxt generate",
+    "deploy": "push-dir --dir=dist --branch=gh-pages --cleanup"
   },
   "dependencies": {
     "bootstrap": "^4.6.1",
@@ -21,5 +23,8 @@
     "vue-slick": "^1.2.0",
     "vue-template-compiler": "^2.6.14",
     "webpack": "^4.46.0"
+  },
+  "devDependencies": {
+    "gh-pages": "^5.0.0"
   }
 }
