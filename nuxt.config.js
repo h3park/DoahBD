@@ -50,4 +50,8 @@ export default {
       compact: true,
     },
   },
+  target: 'static',
+  router: {
+    base: '/DoahBD/'
+  }
 }
