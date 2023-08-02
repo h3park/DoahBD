@@ -14,12 +14,11 @@
         <img src="../assets/words/mainTitle.png" class="image-contain">
       </div>
       <div class="temp-abs" style="height:60%; top: 23%">
-        <img src="../assets/MAIN1.png" class="mainImg image-contain">
+        <img src="../assets/MAIN.png" class="mainImg image-contain">
       </div>
       <div class="paragraph temp-abs" style="height: 17%; top:83%">
         <h4>2023.08.20 12시</h4>
-        <h4>서울클럽
-          <span style="font-size:1.4rem">지리산룸(ROOM)</span></h4>
+        <h4>서울클럽  -  <span style="font-size:1.4rem">한라산룸</span></h4>
       </div>
       <!-- <img src="../assets/doahJoah_100.jpg"  class="image-fit" z-index=0>
       <div class="imgBlur">
@@ -211,7 +210,7 @@ export default {
       mapURL: "nmap://actionPath?parameter=value&appname=http://www.localhost:3000",
       address: "서울 중구 장충단로 86",
       placeName: "서울클럽",
-      placeNameDetail: "지리산룸",
+      placeNameDetail: "한라산룸",
       placeTel: "02-2238-7666",
       transport: {
         "교통편":"420 / 01 / 8001번 버스", 
@@ -224,7 +223,7 @@ export default {
       parentTel:{"아빠":"01030365213", "엄마": "01028269110"},
       birthDay: "2023-08-23",
       calendarContext: null,
-      photoCnt: 30,
+      photoCnt: 18,
       dragged: false,
       currImgIndex: 0,
       items: 7,
@@ -474,10 +473,9 @@ body::-webkit-scrollbar{
     background-color: #E7F5ED;
   }
   .gallerySection .sub-img{
-    height: 100%;
     width: 100%;
+    max-height: 100%;
     object-fit: cover;
-    /* opacity: 0.7; */
     aspect-ratio: 1/1;
   }
 }
@@ -490,7 +488,6 @@ body::-webkit-scrollbar{
   .gallerySection .sub-img{
     width: 100%;
     object-fit: cover;
-    /* opacity: 0.7; */
     aspect-ratio: 1/1;
   }
 }
