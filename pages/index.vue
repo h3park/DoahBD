@@ -45,12 +45,12 @@
           <div v-for="(telNum, p) in parentTel" :key="p" class="singleContact">
             <h4 style="display:flex; align-items:bottom; ">{{p}}에게 연락하기</h4>
             <div class="contactPhone">
-              <button :href="'tel:'+telNum">
-                <b-icon icon="telephone-fill" :style="[p==='아빠'? 'color: #89cff0;':'color:#f4c2c2;']"></b-icon></button>
+              <a :href="'tel:'+telNum">
+                <b-icon icon="telephone-fill" :style="[p==='아빠'? 'color: #89cff0;':'color:#f4c2c2;']"></b-icon></a>
               <span class="divider" :style=" p === '아빠' ? 'background-color:#89cff0': 'background-color: #f4c2c2'"></span>
-              <button :href="'sms:'+telNum">
+              <a :href="'sms:'+telNum">
                 <b-icon icon="envelope-fill" :style="[p==='아빠'? 'color: #89cff0':'color:#f4c2c2']"></b-icon>
-              </button>
+              </a>
             </div>
           </div>
         </div>
@@ -448,17 +448,22 @@ body::-webkit-scrollbar{
   flex-direction: row;
   flex: 1;
 }
-.singleContact .contactPhone button{
+.singleContact .contactPhone a{
   background-color: transparent; 
   border: none; 
   font-size:0.9rem;
   flex: 1;
+  position: relative;
 }
 .singleContact .contactPhone svg{
   width: 35%;
   max-width: 60px;
   height: 35%;
   max-height: 60px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 /* 갤러리 */
@@ -555,6 +560,10 @@ body::-webkit-scrollbar{
 }
 
 /* 지도 */
+.dirSection{
+  min-height: 100vh;
+  height: 100%;
+}
 .dirSection .dirContent{
   width:70%;
   max-width: 800px;
@@ -616,5 +625,5 @@ body::-webkit-scrollbar{
   }
 }
 
-</style>>
+</style>
 
