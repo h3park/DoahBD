@@ -12,7 +12,10 @@ export default {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
-      { name: 'format-detection', content: 'telephone=no' }
+      { name: 'format-detection', content: 'telephone=no' },
+      { property: "og:title", content: "도아의 첫번째 생일🎉"},
+      {property:"og:type", content:"website"},
+      {property: "og:image", content: "https://ifh.cc/g/okbFV3.jpg"}
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
