@@ -81,7 +81,8 @@
         <!-- <img :src="require('../assets/gallery/gallery'+currImgIndex+'.jpg')"
           class="main-img"
           @mouseover="Hover(true)" @mouseleave="Hover(false)"> -->
-        <hooper group="group1" style="height: 85%; padding-bottom:1.5rem;" class="size-limit" :wheelControl="false" :infiniteScroll="true">
+        <hooper group="group1" style="height: 85%; padding-bottom:1.5rem;" class="size-limit" 
+          :wheelControl="false" :infiniteScroll="true" :autoPlay="true" :playSpeed="3800">
           <slide
             v-for="(_,index) in photoCnt" 
             :key="index" >
